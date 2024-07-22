@@ -1,4 +1,4 @@
-async function getPokemonList(limit = 1, offset = 0) {
+async function getPokemonList(limit = 6, offset = 0) {
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
   let response = await fetch(url);
   let data = await response.json();

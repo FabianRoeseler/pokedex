@@ -114,10 +114,16 @@ display: flex;
   gap: 20px;
 }
 
+section {
+  display: flex;
+  justify-content: center;
+}
+
 .gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  width: calc(100vw - 100px);
 }
 
 .card {
