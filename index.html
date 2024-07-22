@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles/style.css" />
+    <link rel="shortcut icon" href="img/monster.svg" type="image/x-icon" />
+    <title>Fabis Pokedex</title>
+  </head>
+  <body onload="getPokemonList()">
+    <div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+      <div class="wave"></div>
+    </div>
+
+    <header>
+      <div class="navbar">
+        <div class="logoContainer">
+          <img class="logo" src="/img/monster.svg" alt="Pokedexlogo" />Fabis
+          Pokedex
+        </div>
+        <div class="searchContainer">
+          <input class="searchBar" type="search" />
+          <button><i>Go!</i></button>
+        </div>
+      </div>
+    </header>
+
+    <div class="gallery" id="gallery">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae ad
+      iusto reprehenderit, culpa sequi, iste doloribus earum, eveniet cupiditate
+      fuga voluptate dolor et expedita omnis! Corporis, est? Ut, sequi suscipit
+      nemo fugit natus eligendi labore voluptate repellat asperiores obcaecati
+      alias reprehenderit in voluptatem repudiandae id, sint modi illo fuga.
+      Quibusdam voluptate deleniti fuga vel quos cupiditate doloribus, eum unde
+      veniam aliquid.
+    </div>
+
+    <div id="fotobox" class="fotobox">
+      <span class="close" id="close">X</span>
+      <span class="show" id="show">Start Show</span>
+      <button class="prev" id="prev"><</button>
+      <img class="fotobox-image" id="fotobox-image" />
+      <button class="next" id="next">></button>
+    </div>
+
+    <footer>
+      <div class="footer">
+        <div>© 2024 <a href="#title">Fabian Roeseler | Github</a></div>
+        <a href="/legalnotice/legal.html">Legal Notice</a>
+      </div>
+    </footer>
+
+    <script src="/script/app.js"></script>
+  </body>
+</html>
