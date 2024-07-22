@@ -5,8 +5,8 @@
 
 body {
   overflow: auto;
-  background: linear-gradient(315deg, rgb(158, 17, 149) 3%, rgb(51, 185, 33) 38%, rgb(211, 92, 12) 68%, rgb(4, 1, 173) 98%);
-  animation: gradient 25s ease infinite;
+  background: linear-gradient(315deg, rgb(158, 17, 149) 3%, rgb(44, 165, 28) 38%, rgb(241, 106, 15) 68%, rgb(12, 9, 187) 98%);
+  animation: gradient 45s ease infinite;
   background-size: 400% 400%;
   background-attachment: fixed;
   padding-top: 120px;
@@ -22,54 +22,6 @@ body {
   }
   100% {
       background-position: 0% 0%;
-  }
-}
-
-.wave {
-  background: rgba(40, 209, 7, 0.25);
-  border-radius: 1000% 1000% 0 0;
-  position: fixed;
-  width: 200%;
-  height: 12em;
-  animation: wave 25s -3s linear infinite;
-  transform: translate3d(0, 0, 0);
-  opacity: 0.8;
-  bottom: 0;
-  left: 0;
-  z-index: -1;
-}
-
-.wave:nth-of-type(2) {
-  bottom: -1.25em;
-  animation: wave 18s linear reverse infinite;
-  opacity: 0.8;
-}
-
-.wave:nth-of-type(3) {
-  bottom: -2.5em;
-  animation: wave 20s -1s reverse infinite;
-  opacity: 0.9;
-}
-
-@keyframes wave {
-  2% {
-      transform: translateX(0);
-  }
-
-  25% {
-      transform: translateX(-25%);
-  }
-
-  50% {
-      transform: translateX(-50%);
-  }
-
-  75% {
-      transform: translateX(-25%);
-  }
-
-  100% {
-      transform: translateX(0);
   }
 }
 
@@ -98,6 +50,7 @@ header {
   width: calc(100vw - 100px);
   overflow: hidden;
   top: 20px;
+  z-index: 1;
 }
 
 .searchContainer {
@@ -124,6 +77,7 @@ section {
   flex-wrap: wrap;
   justify-content: center;
   width: calc(100vw - 100px);
+  gap: 20px;
 }
 
 .card {
@@ -138,7 +92,7 @@ section {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 10px;
+  gap: 20px;
 }
 
 .card img {
@@ -146,9 +100,10 @@ section {
 }
 
 .card:hover {
-  transform: scale(1.025);
   opacity: 1;
-  border: 2px solid black;
+  -webkit-box-shadow: 4px 4px 8px 4px rgb(73, 78, 2); 
+  box-shadow: 4px 4px 8px 4px rgb(73, 78, 2);
+  scale: 1.05;
 }
 
 .fotobox {
@@ -237,7 +192,7 @@ footer {
   font-size: 12px;
   filter: drop-shadow(7px 5px 4px #000000);
   border: 1px solid #000000;
-  margin: 5px;
+  margin: 15px;
 }
 
 .footer a {
