@@ -11,7 +11,7 @@ body {
   background-size: 400% 400%;
   background-attachment: fixed;
   padding-top: 120px;
-  color: white;
+  color: #334155;
 }
 
 @keyframes gradient {
@@ -124,6 +124,11 @@ section {
 }
 
 .idNumber {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  margin-top: 30px;
+  margin-left: 30px;
   font-size: 12px;
 }
 
@@ -136,11 +141,55 @@ section {
   justify-content: center;
 }
 
+.cardFooter {
+  display: flex;
+  justify-content: right;
+  width: 60%;
+}
+
+.typeContainer {
+  padding-bottom: 20px;
+}
+
 .buttonContainer {
   display: flex;
   justify-content: center;
   gap: 20px;
   padding-top: 20px;
+}
+
+.loadingButton {
+  cursor: pointer;
+  font-size: 18px;
+  width: 80px;
+  color: #334155;
+  text-align: center;
+  border-radius: 50px;
+  transition: 0.1s;
+}
+
+.left {
+  background: linear-gradient(270deg,#dd2c00, #038334 50%);
+}
+
+.right {
+  background: linear-gradient(90deg,#dd2c00 0, #038334 50%);
+}
+
+.left:hover {
+  rotate: -2deg;
+  scale: 1.05;
+  transition: 0.1s;
+  box-shadow: -5px 5px 8px 5px rgba(73, 78, 2, 0.8);
+  border-radius: 50px 0px 0px 50px;
+}
+
+.right:hover {
+  rotate: 2deg;
+  scale: 1.05;
+  transition: 0.1s;
+  box-shadow: 5px 5px 8px 5px rgba(73, 78, 2, 0.8);
+  border-radius: 0px 50px 50px 0px;
 }
 
 footer {
@@ -164,12 +213,12 @@ footer {
 }
 
 .footer a {
-  color: white;
+  color: #334155;
   text-decoration: none;
 }
 
 .footer a:hover {
-  color: black;
+  color: white;
   text-decoration: underline;
 }
 
