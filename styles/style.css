@@ -105,6 +105,7 @@ section {
 .card img:hover {
   scale: 1.5;
   transition: 0.1s;
+  rotate: -6deg;
 }
 
 .card:hover {
@@ -113,7 +114,7 @@ section {
   box-shadow: 4px 4px 8px 4px rgb(73, 78, 2);
   scale: 1.05;
   transition: 0.1s;
-  rotate: 1deg;
+  rotate: 2deg;
 }
 
 .cardHeader {
@@ -154,7 +155,7 @@ section {
 .buttonContainer {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
   padding-top: 20px;
 }
 
@@ -166,6 +167,7 @@ section {
   text-align: center;
   border-radius: 50px;
   transition: 0.1s;
+  border: none;
 }
 
 .left {
@@ -173,12 +175,12 @@ section {
 }
 
 .right {
-  background: linear-gradient(90deg,#dd2c00 0, #038334 50%);
+  background: linear-gradient(90deg,#dd2c00 , #038334 50%);
 }
 
 .left:hover {
   rotate: -2deg;
-  scale: 1.05;
+  scale: 1.1;
   transition: 0.1s;
   box-shadow: -5px 5px 8px 5px rgba(73, 78, 2, 0.8);
   border-radius: 50px 0px 0px 50px;
@@ -186,7 +188,7 @@ section {
 
 .right:hover {
   rotate: 2deg;
-  scale: 1.05;
+  scale: 1.1;
   transition: 0.1s;
   box-shadow: 5px 5px 8px 5px rgba(73, 78, 2, 0.8);
   border-radius: 0px 50px 50px 0px;
@@ -228,8 +230,8 @@ footer {
 }
 
 .bigCard {
-  width: 40vw;
-  height: 50vh;
+  min-width: 240px;
+  height: 320px;
   border: 1px solid black;
   border-radius: 10px;
 }
