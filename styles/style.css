@@ -103,7 +103,7 @@ section {
 }
 
 .card img:hover {
-  scale: 1.5;
+  scale: 2.5;
   transition: 0.1s;
   rotate: -6deg;
 }
@@ -140,6 +140,7 @@ section {
   width: calc(100% + 13px);
   display: flex;
   justify-content: center;
+  background-color: rgba(240, 90, 3, 0.8);
 }
 
 .cardFooter {
@@ -225,15 +226,80 @@ footer {
 }
 
 .bigCardContainer {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 5;
 }
 
 .bigCard {
-  min-width: 240px;
-  height: 320px;
+  height: 100%;
   border: 1px solid black;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.topCard {
+  background-color: #111827;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.midCard {
+  background-color: #111827;
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottomCard {
+  background-color: #111827;
+  width: 100%;
+  height: 40%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rainbowFrame {
+	--angle: 0deg;
+	width: 70vw;
+	height: 50vh;
+	border: 5px solid;
+	border-image: conic-gradient(from var(--angle), red, yellow, lime, aqua, blue, magenta, red) 1;
+	
+	animation: 10s rotate linear infinite;
+}
+
+@keyframes rotate {
+	to {
+		--angle: 360deg;
+	}
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .normal {

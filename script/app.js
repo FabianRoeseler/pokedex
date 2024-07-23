@@ -28,7 +28,7 @@ async function displayPokemonList(pokemonList) {
       <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
       <img src="${pokemonDetails.sprites.other.home.front_default}">
       <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
-      <div class="cardFooter"><div class="typeContainer"><p class="cardType ${pokemonDetails.types[0].type.name}">${pokemonDetails.types[0].type.name}</p></div></div> <br>
+      <div class="cardFooter"><div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div></div> <br>
     </div>`;
   }
 }
