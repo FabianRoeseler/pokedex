@@ -1,7 +1,7 @@
 let currentOffset = 0;
 const limit = 2;
 
-async function getPokemonList(limit = 2, offset = 0) {
+async function getPokemonList(limit = 20, offset = 0) {
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
   let response = await fetch(url);
   let data = await response.json();
@@ -24,11 +24,11 @@ async function displayPokemonList(pokemonList) {
     let pokemon = pokemonList[j];
     let pokemonDetails = await getPokemonDetails(pokemon.url);
     renderData.innerHTML += `
-    <div class="card">
-          <img src="${pokemonDetails.sprites.other.home.front_default}">
-      <div class="cardHeader"><p><b>${pokemonDetails.name}</b></p> <p class="idNumber">#${pokemonDetails.id}</p></div>
-      <div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div> <br>
-
+    <div class="card ${pokemonDetails.types[0].type.name}">
+      <div><span class="idNumber">#${pokemonDetails.id}</span></div>
+      <img src="${pokemonDetails.sprites.other.home.front_default}">
+      <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
+      <div class="typeContainer"><p class="cardType ${pokemonDetails.types[0].type.name}">${pokemonDetails.types[0].type.name}</p></div> <br>
     </div>`;
   }
 }
