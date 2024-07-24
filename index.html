@@ -15,8 +15,16 @@
           <img class="fontlogo" src="/img/pokedexlogo.png" alt="Pokemonlogo" />
         </div>
         <div class="searchContainer">
-          <input class="searchBar" type="search" />
-          <button><i>Go!</i></button>
+          <input
+            id="searchBar"
+            class="searchBar"
+            type="search"
+            placeholder="ID or Fullname"
+            onkeyup="checkSearch()"
+          />
+          <button id="searchButton" onclick="searchPokemon()" disabled>
+            <i>Go!</i>
+          </button>
         </div>
       </div>
     </header>

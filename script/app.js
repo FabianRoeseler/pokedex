@@ -1,3 +1,5 @@
+const renderData = document.getElementById("gallery");
+const enterQuery = document.getElementById("searchButton");
 let currentOffset = 0;
 const limit = 10;
 
@@ -17,7 +19,6 @@ async function getPokemonDetails(url) {
 }
 
 async function displayPokemonList(pokemonList) {
-  const renderData = document.getElementById("gallery");
   renderData.innerHTML = "";
 
   for (let j = 0; j < pokemonList.length; j++) {
@@ -41,4 +42,42 @@ function showNextPokemon() {
 function showLastPokemon() {
   currentOffset -= limit;
   getPokemonList(limit, currentOffset);
+}
+
+async function searchPokemon() {
+  const query = document.getElementById("searchBar").value.toLowerCase();
+  if (!isNaN(query) || query.length >= 3) {
+    try {
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${query}`
+      );
+      if (!response.ok) {
+        throw new Error("Pokémon not found");
+      }
+      const data = await response.json();
+      displayPokemon(data);
+    } catch (error) {
+      renderData.innerHTML = `<p>${error.message}</p>`;
+    }
+  } else {
+    renderData.innerHTML = `<p>Please enter a valid query (a number or at least 3 characters for names).</p>`;
+  }
+}
+
+function displayPokemon(pokemonDetails) {
+  renderData.innerHTML = `
+  <div class="card ${pokemonDetails.types[0].type.name}">
+    <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
+    <img src="${pokemonDetails.sprites.other.home.front_default}">
+    <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
+    <div class="cardFooter"><div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div></div> <br>
+  </div>`;
+}
+
+function checkSearch() {
+  if (document.getElementById("searchBar").value === "") {
+    document.getElementById("searchButton").disabled = true;
+  } else {
+    document.getElementById("searchButton").disabled = false;
+  }
 }
