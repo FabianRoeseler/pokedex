@@ -1,14 +1,8 @@
 const renderData = document.getElementById("gallery");
 const enterQuery = document.getElementById("searchButton");
-const modal = document.getElementById("pokemonModal");
-const modalContent = document.getElementById("modalContent");
-const prevButton = document.getElementById("prevButton");
-const nextButton = document.getElementById("nextButton");
-const limit = 10;
-let currentPokemonIndex = 0;
-let currentPokemonList = [];
-let currentOffset = 0;
 document.getElementById("searchBar").value = "";
+let currentOffset = 0;
+const limit = 10;
 
 async function getPokemonList(limit = 2, offset = 0) {
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
@@ -27,18 +21,17 @@ async function getPokemonDetails(url) {
 
 async function displayPokemonList(pokemonList) {
   renderData.innerHTML = "";
-  currentPokemonList = pokemonList;
 
   for (let j = 0; j < pokemonList.length; j++) {
     let pokemon = pokemonList[j];
     let pokemonDetails = await getPokemonDetails(pokemon.url);
     renderData.innerHTML += `
-      <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
-        <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
-        <img src="${pokemonDetails.sprites.other.home.front_default}">
-        <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
-        <div class="cardFooter"><div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div></div> <br>
-      </div>`;
+    <div class="card ${pokemonDetails.types[0].type.name}">
+      <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
+      <img src="${pokemonDetails.sprites.other.home.front_default}">
+      <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
+      <div class="cardFooter"><div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div></div> <br>
+    </div>`;
   }
 }
 
@@ -86,48 +79,4 @@ function checkSearch() {
   } else {
     document.getElementById("searchButton").disabled = false;
   }
-}
-
-async function openModal(index) {
-  currentPokemonIndex = index;
-  const pokemon = currentPokemonList[index];
-  const pokemonDetails = await getPokemonDetails(pokemon.url);
-  displayModalPokemon(pokemonDetails);
-  modal.style.display = "block";
-}
-
-function displayModalPokemon(pokemonDetails) {
-  modalContent.innerHTML = `
-      <div class="rainbowFrame">
-        <div class="bigCard">
-          <div class="topCard">Name + Id <span onclick="closeTheModal()" class="close">&times;</span></div>
-          <div class="midCard">img</div>
-          <div class="bottomCard">
-            <div class="box" id="boxOne">1</div>
-            <div class="box" id="boxTwo">2</div>
-            <div class="box" id="boxThree">3</div>
-            <div class="box" id="boxFour">4</div>
-            <div>
-            <button id="prevButton">Previous</button>
-            <button id="nextButton">Next</button>
-            </div>
-          </div>
-        </div>
-      </div>`;
-}
-
-prevButton.onclick = function () {
-  if (currentPokemonIndex > 0) {
-    openModal(currentPokemonIndex - 1);
-  }
-};
-
-nextButton.onclick = function () {
-  if (currentPokemonIndex < currentPokemonList.length - 1) {
-    openModal(currentPokemonIndex + 1);
-  }
-};
-
-function closeTheModal() {
-  modal.style.display = "none";
 }
