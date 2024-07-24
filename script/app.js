@@ -1,5 +1,5 @@
 let currentOffset = 0;
-const limit = 2;
+const limit = 10;
 
 async function getPokemonList(limit = 2, offset = 0) {
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
