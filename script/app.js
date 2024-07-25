@@ -20,7 +20,7 @@ async function getPokemonList(limit = 2, offset = 0) {
 async function getPokemonDetails(url) {
   let response = await fetch(url);
   let data = await response.json();
-  console.log(data);
+  /*   console.log(data); */
   return data;
 }
 
@@ -68,7 +68,13 @@ async function searchPokemon() {
         throw new Error("Please enter the ID or full name of the Pokemon");
       }
       const data = await response.json();
-      displayPokemon(data);
+      currentPokemonList = [
+        {
+          url: `https://pokeapi.co/api/v2/pokemon/${data.id}`,
+          ...data,
+        },
+      ];
+      displayPokemon(data, 0);
     } catch (error) {
       renderData.innerHTML = `<p>${error.message}</p>`;
     }
@@ -77,13 +83,13 @@ async function searchPokemon() {
 
 async function displayPokemon(pokemonDetails, j) {
   let types = `<div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div>`;
-  if (pokemonDetails.types[0] && pokemonDetails.types[1]) {
+  if (pokemonDetails.types[1]) {
     types += `
       <div class="typeContainer">
       <p class="cardType">${pokemonDetails.types[1].type.name}</p>
       </div>`;
   }
-  checkTypes(pokemonDetails, j);
+
   renderData.innerHTML = `
       <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
         <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
@@ -109,28 +115,35 @@ async function openModal(j) {
   modal.style.display = "block";
 }
 
+async function getPokemonDetails(url) {
+  const response = await fetch(url);
+  if (!response.ok) {
+    console.error(`Error fetching details: ${response.statusText}`);
+    throw new Error("Failed fetching Pokemon details");
+  }
+  return await response.json();
+}
+
 function displayModalPokemon(pokemonDetails) {
   modalContent.innerHTML = `
       <div class="rainbowFrame">
         <div class="bigCard">
           <div class="topCard"><b>#${pokemonDetails.id}</b> <b>${pokemonDetails.name}</b><span onclick="closeTheModal()" class="close">&times;</span></div>
           <div class="midCard ${pokemonDetails.types[0].type.name}">
-          <img class="cardImg" src="${pokemonDetails.sprites.other.home.front_default}">
+            <img class="cardImg" src="${pokemonDetails.sprites.other.home.front_default}">
           </div>
           <div class="bottomCard">
             <div class="box" id="boxOne"></div>
-            <div class="box" id="boxTwo">2
-            
-            </div>
+            <div class="box" id="boxTwo">2</div>
             <div class="box" id="boxThree">3</div>
             <div class="box" id="boxFour">
-            <img class="cardGif" src="${pokemonDetails.sprites.other.showdown.front_shiny}">
+              <img class="cardGif" src="${pokemonDetails.sprites.other.showdown.front_shiny}">
             </div>
           </div>
-                      <div class="navigationBar">
+          <div class="navigationBar">
             <button id="prevButton" class="loadingButton left" onclick="prevPokemon()">Previous</button>
-            <button id="nextButton" class="loadingButton right" onclick="nextPokemon()">>Next</button>
-            </div>
+            <button id="nextButton" class="loadingButton right" onclick="nextPokemon()">Next</button>
+          </div>
         </div>
       </div>`;
 }
@@ -150,6 +163,7 @@ function nextPokemon() {
 function closeTheModal() {
   modal.style.display = "none";
 }
+
 function checkTypes(pokemonDetails) {
   let types = `<div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div>`;
   if (pokemonDetails.types[0] && pokemonDetails.types[1]) {
