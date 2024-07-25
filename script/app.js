@@ -5,10 +5,17 @@ const modalContent = document.getElementById("modalContent");
 const prevButton = document.getElementById("prevButton");
 const nextButton = document.getElementById("nextButton");
 const limit = 10;
+let currentOffset = 0;
 let currentPokemonIndex = 0;
 let currentPokemonList = [];
-let currentOffset = 0;
+let allPokemonList = [];
 document.getElementById("searchBar").value = "";
+
+async function fetchAllPokemon() {
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10000`);
+  const data = await response.json();
+  allPokemonList = data.results;
+}
 
 async function getPokemonList(limit = 2, offset = 0) {
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
@@ -59,24 +66,21 @@ function showLastPokemon() {
 
 async function searchPokemon() {
   const query = document.getElementById("searchBar").value.toLowerCase();
-  if (!isNaN(query) || query.length >= 3) {
-    try {
-      const response = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${query}`
-      );
-      if (!response.ok) {
-        throw new Error("Please enter the ID or full name of the Pokemon");
+  if (query.length >= 3) {
+    const filteredPokemon = allPokemonList.filter((pokemon) =>
+      pokemon.name.includes(query)
+    );
+    if (filteredPokemon.length === 0) {
+      renderData.innerHTML = `<p>Pokémon not found "${query}"</p>`;
+    } else {
+      currentPokemonList = filteredPokemon;
+      renderData.innerHTML = "";
+      for (let i = 0; i < currentPokemonList.length; i++) {
+        const pokemonDetails = await getPokemonDetails(
+          currentPokemonList[i].url
+        );
+        displayPokemon(pokemonDetails, i);
       }
-      const data = await response.json();
-      currentPokemonList = [
-        {
-          url: `https://pokeapi.co/api/v2/pokemon/${data.id}`,
-          ...data,
-        },
-      ];
-      displayPokemon(data, 0);
-    } catch (error) {
-      renderData.innerHTML = `<p>${error.message}</p>`;
     }
   }
 }
@@ -90,7 +94,7 @@ async function displayPokemon(pokemonDetails, j) {
       </div>`;
   }
 
-  renderData.innerHTML = `
+  renderData.innerHTML += `
       <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
         <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
         <img src="${pokemonDetails.sprites.other.home.front_default}">
