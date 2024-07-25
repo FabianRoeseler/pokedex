@@ -14,7 +14,7 @@ async function getPokemonList(limit = 2, offset = 0) {
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
   let response = await fetch(url);
   let data = await response.json();
-  console.log(data);
+  /*   console.log(data); */
   displayPokemonList(data.results);
 }
 
@@ -100,23 +100,45 @@ function displayModalPokemon(pokemonDetails) {
   modalContent.innerHTML = `
       <div class="rainbowFrame">
         <div class="bigCard">
-          <div class="topCard">Name + Id <span onclick="closeTheModal()" class="close">&times;</span></div>
-          <div class="midCard">img</div>
+          <div class="topCard"><b>#${pokemonDetails.id}</b> <b>${pokemonDetails.name}</b><span onclick="closeTheModal()" class="close">&times;</span></div>
+          <div class="midCard ${pokemonDetails.types[0].type.name}">
+          <img class="cardImg" src="${pokemonDetails.sprites.other.home.front_default}">
+          </div>
           <div class="bottomCard">
             <div class="box" id="boxOne">1</div>
-            <div class="box" id="boxTwo">2</div>
+            <div class="box" id="boxTwo">2
+            
+            </div>
             <div class="box" id="boxThree">3</div>
-            <div class="box" id="boxFour">4</div>
-            <div>
-            <button id="prevButton">Previous</button>
-            <button id="nextButton">Next</button>
+            <div class="box" id="boxFour">
+            <img class="cardGif" src="${pokemonDetails.sprites.other.showdown.front_shiny}">
+            </div>
+            <div class="navigationBar">
+            <button id="prevButton" class="loadingButton left" onclick="prevPokemon()">Previous</button>
+            <button id="nextButton" class="loadingButton right" onclick="nextPokemon()">>Next</button>
             </div>
           </div>
         </div>
       </div>`;
 }
 
-prevButton.onclick = function () {
+function prevPokemon() {
+  if (currentPokemonIndex > 0) {
+    openModal(currentPokemonIndex - 1);
+  }
+}
+
+function nextPokemon() {
+  if (currentPokemonIndex < currentPokemonList.length - 1) {
+    openModal(currentPokemonIndex + 1);
+  }
+}
+
+function closeTheModal() {
+  modal.style.display = "none";
+}
+
+/* prevButton.onclick = function () {
   if (currentPokemonIndex > 0) {
     openModal(currentPokemonIndex - 1);
   }
@@ -126,8 +148,4 @@ nextButton.onclick = function () {
   if (currentPokemonIndex < currentPokemonList.length - 1) {
     openModal(currentPokemonIndex + 1);
   }
-};
-
-function closeTheModal() {
-  modal.style.display = "none";
-}
+}; */
