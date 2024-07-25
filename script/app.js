@@ -105,7 +105,7 @@ function displayModalPokemon(pokemonDetails) {
           <img class="cardImg" src="${pokemonDetails.sprites.other.home.front_default}">
           </div>
           <div class="bottomCard">
-            <div class="box" id="boxOne">1</div>
+            <div class="box" id="boxOne">Second Type: ${pokemonDetails.types[1].type.name}</div>
             <div class="box" id="boxTwo">2
             
             </div>
@@ -113,11 +113,11 @@ function displayModalPokemon(pokemonDetails) {
             <div class="box" id="boxFour">
             <img class="cardGif" src="${pokemonDetails.sprites.other.showdown.front_shiny}">
             </div>
-            <div class="navigationBar">
+          </div>
+                      <div class="navigationBar">
             <button id="prevButton" class="loadingButton left" onclick="prevPokemon()">Previous</button>
             <button id="nextButton" class="loadingButton right" onclick="nextPokemon()">>Next</button>
             </div>
-          </div>
         </div>
       </div>`;
 }
