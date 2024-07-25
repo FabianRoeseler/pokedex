@@ -14,7 +14,6 @@ async function getPokemonList(limit = 2, offset = 0) {
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
   let response = await fetch(url);
   let data = await response.json();
-  /*   console.log(data); */
   displayPokemonList(data.results);
 }
 
@@ -28,16 +27,22 @@ async function getPokemonDetails(url) {
 async function displayPokemonList(pokemonList) {
   renderData.innerHTML = "";
   currentPokemonList = pokemonList;
-
   for (let j = 0; j < pokemonList.length; j++) {
-    let pokemon = pokemonList[j];
+    const pokemon = pokemonList[j];
     let pokemonDetails = await getPokemonDetails(pokemon.url);
+    let types = `<div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div>`;
+    if (pokemonDetails.types[0] && pokemonDetails.types[1]) {
+      types += `
+      <div class="typeContainer">
+      <p class="cardType">${pokemonDetails.types[1].type.name}</p>
+      </div>`;
+    }
     renderData.innerHTML += `
       <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
         <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
         <img src="${pokemonDetails.sprites.other.home.front_default}">
         <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
-        <div class="cardFooter"><div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div></div> <br>
+        <div class="cardFooter">${types}</div>
       </div>`;
   }
 }
@@ -70,14 +75,22 @@ async function searchPokemon() {
   }
 }
 
-function displayPokemon(pokemonDetails) {
+async function displayPokemon(pokemonDetails, j) {
+  let types = `<div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div>`;
+  if (pokemonDetails.types[0] && pokemonDetails.types[1]) {
+    types += `
+      <div class="typeContainer">
+      <p class="cardType">${pokemonDetails.types[1].type.name}</p>
+      </div>`;
+  }
+  checkTypes(pokemonDetails, j);
   renderData.innerHTML = `
-  <div class="card ${pokemonDetails.types[0].type.name}">
-    <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
-    <img src="${pokemonDetails.sprites.other.home.front_default}">
-    <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
-    <div class="cardFooter"><div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div></div> <br>
-  </div>`;
+      <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
+        <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
+        <img src="${pokemonDetails.sprites.other.home.front_default}">
+        <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
+        <div class="cardFooter">${types}</div>
+      </div>`;
 }
 
 function checkSearch() {
@@ -88,9 +101,9 @@ function checkSearch() {
   }
 }
 
-async function openModal(index) {
-  currentPokemonIndex = index;
-  const pokemon = currentPokemonList[index];
+async function openModal(j) {
+  currentPokemonIndex = j;
+  const pokemon = currentPokemonList[j];
   const pokemonDetails = await getPokemonDetails(pokemon.url);
   displayModalPokemon(pokemonDetails);
   modal.style.display = "block";
@@ -105,7 +118,7 @@ function displayModalPokemon(pokemonDetails) {
           <img class="cardImg" src="${pokemonDetails.sprites.other.home.front_default}">
           </div>
           <div class="bottomCard">
-            <div class="box" id="boxOne">Second Type: ${pokemonDetails.types[1].type.name}</div>
+            <div class="box" id="boxOne"></div>
             <div class="box" id="boxTwo">2
             
             </div>
@@ -137,15 +150,16 @@ function nextPokemon() {
 function closeTheModal() {
   modal.style.display = "none";
 }
-
-/* prevButton.onclick = function () {
-  if (currentPokemonIndex > 0) {
-    openModal(currentPokemonIndex - 1);
+function checkTypes(pokemonDetails) {
+  let types = `<div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div>`;
+  if (pokemonDetails.types[0] && pokemonDetails.types[1]) {
+    types += `
+    <div class="typeContainer">
+    <p class="cardType">${pokemonDetails.types[1].type.name}</p>
+    </div>`;
   }
-};
+}
 
-nextButton.onclick = function () {
-  if (currentPokemonIndex < currentPokemonList.length - 1) {
-    openModal(currentPokemonIndex + 1);
-  }
-}; */
+function reloadPage() {
+  location.replace(location.href);
+}

@@ -31,6 +31,7 @@ body {
   position: absolute;
   left: 190px;
   bottom: 10px;
+  cursor: pointer;
 }
 
 .logo {
@@ -155,8 +156,9 @@ section {
 
 .cardFooter {
   display: flex;
-  justify-content: right;
-  width: 60%;
+  justify-content: space-evenly;
+  width: 100%;
+  padding-bottom: 20px;
 }
 
 .typeContainer {
