@@ -97,7 +97,7 @@ async function displayPokemon(pokemonDetails, j) {
   renderData.innerHTML += `
       <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
         <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
-        <img src="${pokemonDetails.sprites.other.home.front_default}">
+        <img src="${pokemonDetails.sprites.other.home.front_default}" alt="Sorry! No Data">
         <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
         <div class="cardFooter">${types}</div>
       </div>`;
@@ -134,7 +134,7 @@ function displayModalPokemon(pokemonDetails) {
         <div class="bigCard">
           <div class="topCard"><b>#${pokemonDetails.id}</b> <b>${pokemonDetails.name}</b><span onclick="closeTheModal()" class="close">&times;</span></div>
           <div class="midCard ${pokemonDetails.types[0].type.name}">
-            <img class="cardImg" src="${pokemonDetails.sprites.other.home.front_default}">
+            <img class="cardImg" src="${pokemonDetails.sprites.other.home.front_default}" alt="Sorry! No Data">
           </div>
           <div class="bottomCard">
             <div class="box" id="boxOne"></div>
