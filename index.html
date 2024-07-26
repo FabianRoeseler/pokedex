@@ -7,7 +7,7 @@
     <link rel="shortcut icon" href="img/monster.svg" type="image/x-icon" />
     <title>Fabis Pokedex</title>
   </head>
-  <body onload="getPokemonList(), fetchAllPokemon();">
+  <body onload="getPokemonList(), fetchAllPokemon(), toggleSpinner()">
     <header>
       <div class="navbar">
         <div class="logoContainer">
@@ -27,7 +27,11 @@
             placeholder="Search..."
             onkeyup="checkSearch()"
           />
-          <button id="searchButton" onclick="searchPokemon()" disabled>
+          <button
+            id="searchButton"
+            onclick="searchPokemon(), toggleSpinner()"
+            disabled
+          >
             <i>Go!</i>
           </button>
         </div>
@@ -35,15 +39,7 @@
     </header>
 
     <section>
-      <div class="gallery" id="gallery">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae ad
-        iusto reprehenderit, culpa sequi, iste doloribus earum, eveniet
-        cupiditate fuga voluptate dolor et expedita omnis! Corporis, est? Ut,
-        sequi suscipit nemo fugit natus eligendi labore voluptate repellat
-        asperiores obcaecati alias reprehenderit in voluptatem repudiandae id,
-        sint modi illo fuga. Quibusdam voluptate deleniti fuga vel quos
-        cupiditate doloribus, eum unde veniam aliquid.
-      </div>
+      <div class="gallery" id="gallery">Loading...</div>
     </section>
 
     <div class="buttonContainer">
@@ -70,6 +66,11 @@
       <div id="modalContent"></div>
     </div>
 
+    <div id="spinner">
+      <div id="spinnerInner">
+        <img src="./img/pokeball.svg" class="pokeball lds-hourglass" />
+      </div>
+    </div>
     <script src="./script/app.js"></script>
   </body>
 </html>

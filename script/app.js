@@ -4,6 +4,7 @@ const modal = document.getElementById("pokemonModal");
 const modalContent = document.getElementById("modalContent");
 const prevButton = document.getElementById("prevButton");
 const nextButton = document.getElementById("nextButton");
+const spinnerToggle = document.getElementById("spinner");
 const limit = 20;
 let currentOffset = 0;
 let currentPokemonIndex = 0;
@@ -54,11 +55,13 @@ async function displayPokemonList(pokemonList) {
 }
 
 function showNextPokemon() {
+  toggleSpinner();
   currentOffset += limit;
   getPokemonList(limit, currentOffset);
 }
 
 function showLastPokemon() {
+  toggleSpinner();
   currentOffset -= limit;
   getPokemonList(limit, currentOffset);
 }
@@ -141,7 +144,7 @@ function displayModalPokemon(pokemonDetails) {
             <div class="box" id="boxTwo">2</div>
             <div class="box" id="boxThree">3</div>
             <div class="box" id="boxFour">
-              <img class="cardGif" src="${pokemonDetails.sprites.other.showdown.front_shiny}">
+              <img class="cardGif" src="${pokemonDetails.sprites.other.showdown.front_shiny}" alt="Sorry! No Data">
             </div>
           </div>
           <div class="navigationBar">
@@ -170,4 +173,13 @@ function closeTheModal() {
 
 function reloadPage() {
   location.replace(location.href);
+}
+
+function toggleSpinner() {
+  spinnerToggle.style.display =
+    spinnerToggle.style.display === "flex" ? "none" : "flex";
+  setTimeout(() => {
+    spinnerToggle.style.display =
+      spinnerToggle.style.display === "flex" ? "none" : "flex";
+  }, 4000);
 }
