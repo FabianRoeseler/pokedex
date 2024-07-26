@@ -140,11 +140,16 @@ function displayModalPokemon(pokemonDetails) {
             <img class="cardImg" src="${pokemonDetails.sprites.other.home.front_default}" alt="Sorry! No Data">
           </div>
           <div class="bottomCard">
-            <div class="box" id="boxOne"></div>
-            <div class="box" id="boxTwo">2</div>
-            <div class="box" id="boxThree">3</div>
-            <div class="box" id="boxFour">
-              <img class="cardGif" src="${pokemonDetails.sprites.other.showdown.front_shiny}" alt="Sorry! No Data">
+            <div class="box" id="boxOne">
+            HP: ${pokemonDetails.stats[0].base_stat} <br>
+            Atk: ${pokemonDetails.stats[1].base_stat}<br>
+            Def: ${pokemonDetails.stats[2].base_stat}<br>
+            Spec. Atk: ${pokemonDetails.stats[3].base_stat}<br>
+            Spec. Def: ${pokemonDetails.stats[4].base_stat}<br>
+            Speed: ${pokemonDetails.stats[5].base_stat}<br>
+            </div>
+            <div class="box" id="boxTwo">
+            <img class="cardGif" src="${pokemonDetails.sprites.other.showdown.front_shiny}" alt="Sorry! No Data">
             </div>
           </div>
           <div class="navigationBar">
