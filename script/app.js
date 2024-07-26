@@ -4,12 +4,11 @@ const modal = document.getElementById("pokemonModal");
 const modalContent = document.getElementById("modalContent");
 const prevButton = document.getElementById("prevButton");
 const nextButton = document.getElementById("nextButton");
-const limit = 10;
+const limit = 20;
 let currentOffset = 0;
 let currentPokemonIndex = 0;
 let currentPokemonList = [];
 let allPokemonList = [];
-document.getElementById("searchBar").value = "";
 
 async function fetchAllPokemon() {
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=10000`);
@@ -17,7 +16,7 @@ async function fetchAllPokemon() {
   allPokemonList = data.results;
 }
 
-async function getPokemonList(limit = 2, offset = 0) {
+async function getPokemonList(limit = 20, offset = 0) {
   let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`;
   let response = await fetch(url);
   let data = await response.json();
@@ -66,6 +65,8 @@ function showLastPokemon() {
 
 async function searchPokemon() {
   const query = document.getElementById("searchBar").value.toLowerCase();
+  clearBar();
+  document.getElementById("searchButton").disabled = true;
   if (query.length >= 3) {
     const filteredPokemon = allPokemonList.filter((pokemon) =>
       pokemon.name.includes(query)
@@ -93,7 +94,6 @@ async function displayPokemon(pokemonDetails, j) {
       <p class="cardType">${pokemonDetails.types[1].type.name}</p>
       </div>`;
   }
-
   renderData.innerHTML += `
       <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
         <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
@@ -111,6 +111,10 @@ function checkSearch() {
   }
 }
 
+function clearBar() {
+  document.getElementById("searchBar").value = "";
+}
+
 async function openModal(j) {
   currentPokemonIndex = j;
   const pokemon = currentPokemonList[j];
@@ -121,10 +125,6 @@ async function openModal(j) {
 
 async function getPokemonDetails(url) {
   const response = await fetch(url);
-  if (!response.ok) {
-    console.error(`Error fetching details: ${response.statusText}`);
-    throw new Error("Failed fetching Pokemon details");
-  }
   return await response.json();
 }
 
@@ -166,16 +166,6 @@ function nextPokemon() {
 
 function closeTheModal() {
   modal.style.display = "none";
-}
-
-function checkTypes(pokemonDetails) {
-  let types = `<div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div>`;
-  if (pokemonDetails.types[0] && pokemonDetails.types[1]) {
-    types += `
-    <div class="typeContainer">
-    <p class="cardType">${pokemonDetails.types[1].type.name}</p>
-    </div>`;
-  }
 }
 
 function reloadPage() {
