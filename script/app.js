@@ -27,7 +27,6 @@ async function getPokemonList(limit = 20, offset = 0) {
 async function getPokemonDetails(url) {
   let response = await fetch(url);
   let data = await response.json();
-  /*   console.log(data); */
   return data;
 }
 
@@ -68,7 +67,6 @@ function showLastPokemon() {
 
 async function searchPokemon() {
   const query = document.getElementById("searchBar").value.toLowerCase();
-  clearBar();
   document.getElementById("searchButton").disabled = true;
   if (query.length >= 3) {
     const filteredPokemon = allPokemonList.filter((pokemon) =>
@@ -186,5 +184,5 @@ function toggleSpinner() {
   setTimeout(() => {
     spinnerToggle.style.display =
       spinnerToggle.style.display === "flex" ? "none" : "flex";
-  }, 1500);
+  }, 2000);
 }
