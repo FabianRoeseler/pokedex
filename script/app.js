@@ -47,7 +47,7 @@ async function displayPokemonList(pokemonList) {
     renderData.innerHTML += `
       <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
         <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
-        <img src="${pokemonDetails.sprites.other.home.front_default}">
+        <img src="${pokemonDetails.sprites.other.home.front_default}" alt="Sorry! No Data">
         <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
         <div class="cardFooter">${types}</div>
       </div>`;
@@ -186,5 +186,5 @@ function toggleSpinner() {
   setTimeout(() => {
     spinnerToggle.style.display =
       spinnerToggle.style.display === "flex" ? "none" : "flex";
-  }, 4000);
+  }, 1500);
 }
