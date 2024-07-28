@@ -468,7 +468,7 @@ footer {
 
 .pokeball {
   height: 80px;
-  animation: lds-hourglass 2s infinite;
+  animation: lds-hourglass 3s infinite;
 }
 
 #spinnerInner {

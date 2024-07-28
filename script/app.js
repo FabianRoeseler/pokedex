@@ -133,5 +133,5 @@ function toggleSpinner() {
   setTimeout(() => {
     spinnerToggle.style.display =
       spinnerToggle.style.display === "flex" ? "none" : "flex";
-  }, 2000);
+  }, 3000);
 }
