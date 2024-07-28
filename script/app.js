@@ -36,20 +36,7 @@ async function displayPokemonList(pokemonList) {
   for (let j = 0; j < pokemonList.length; j++) {
     const pokemon = pokemonList[j];
     let pokemonDetails = await getPokemonDetails(pokemon.url);
-    let types = `<div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div>`;
-    if (pokemonDetails.types[0] && pokemonDetails.types[1]) {
-      types += `
-      <div class="typeContainer">
-      <p class="cardType">${pokemonDetails.types[1].type.name}</p>
-      </div>`;
-    }
-    renderData.innerHTML += `
-      <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${j})">
-        <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
-        <img src="${pokemonDetails.sprites.other.home.front_default}" alt="Sorry! No Data">
-        <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
-        <div class="cardFooter">${types}</div>
-      </div>`;
+    renderData.innerHTML += generatePokemonCard(pokemonDetails, j);
   }
 }
 

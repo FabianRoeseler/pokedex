@@ -43,3 +43,21 @@ function renderPokemonCard(pokemonDetails, j) {
       <div class="cardFooter">${types}</div>
     </div>`;
 }
+
+function generatePokemonCard(pokemonDetails, index) {
+  let types = `<div class="typeContainer"><p class="cardType">${pokemonDetails.types[0].type.name}</p></div>`;
+  if (pokemonDetails.types.length > 1 && pokemonDetails.types[1]) {
+    types += `
+    <div class="typeContainer">
+      <p class="cardType">${pokemonDetails.types[1].type.name}</p>
+    </div>`;
+  }
+
+  return `
+    <div class="card ${pokemonDetails.types[0].type.name}" onclick="openModal(${index})">
+      <div class="idNumber"><span>#${pokemonDetails.id}</span></div>
+      <img src="${pokemonDetails.sprites.other.home.front_default}" alt="Sorry! No Data">
+      <div class="cardHeader"><span><b>${pokemonDetails.name}</b></span></div>
+      <div class="cardFooter">${types}</div>
+    </div>`;
+}
